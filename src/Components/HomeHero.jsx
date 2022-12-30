@@ -12,7 +12,7 @@ export default function Example() {
                   Hi there, I'm Arda Bagce
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                  Welcome to my personal portfolio website
+                  Welcome to my personal portfolio website...
                 </p>
                 <div className="mt-8 flex gap-x-4 sm:justify-center">
                 </div>
