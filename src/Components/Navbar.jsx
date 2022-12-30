@@ -1,8 +1,10 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, PhotoIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "../Assets/logo.png"
 import ArdaFoto from "../Assets/ArdaFoto.jpg"
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase.config'
 
 const navigation = [
   { name: 'Home', href: '/Home', current: false },
@@ -11,11 +13,25 @@ const navigation = [
   { name: 'Contact', href: '/Contact', current: false },
 ]
 
+
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Example() {
+  const userData = auth.currentUser
+  let photoURL = null
+  const imagePlaceholder = ArdaFoto
+  if (userData && userData.photoURL) {
+    photoURL = userData.photoURL;
+  } else {
+    photoURL = imagePlaceholder;
+  }
+  
+  const logout=async()=>{
+    await signOut(auth)
+  }
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -82,7 +98,8 @@ export default function Example() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={ArdaFoto}
+                        src=
+                        {photoURL}
                         alt=""
                       />
                     </Menu.Button>
@@ -126,6 +143,15 @@ export default function Example() {
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign Up
+                          </a>
+                        )}
+                      </Menu.Item><Menu.Item>
+                        {({ active }) => (
+                          <a
+                            onClick={logout}
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Sign Out
                           </a>
                         )}
                       </Menu.Item>

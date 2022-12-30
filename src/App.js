@@ -13,12 +13,19 @@ import ScrollToTop from "./Components/ScrollToTop";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import Profile from "./Pages/Profile";
+import {auth} from './firebase.config'
+import { onAuthStateChanged } from 'firebase/auth';
+import { useState } from "react";
 
 function App() {
+
+  const[user,setUser]=useState({})
+  onAuthStateChanged(auth,(currentUser)=>{
+    setUser(currentUser)
+  })
   return (
     <Router>
     <div className="App">
-      <ScrollToTop />
       <NavigationBar/>
       <Routes>
         <Route path="/" element={<Home />} />
