@@ -23,7 +23,9 @@ export const userData = auth.currentUser
 
 export const signInWithGoogle=()=>{
   signInWithPopup(auth,Provider).then((result)=>{
-    alert(result)
+    return(
+      <div>Giriş Başarılı</div>
+    )
   }).catch((error)=>{
     alert(error)
   })

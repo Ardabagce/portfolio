@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, PhotoIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "../Assets/logo.png"
-import ArdaFoto from "../Assets/ArdaFoto.jpg"
+import profilePlaceholder from "../Assets/profilePlaceholder.jpeg"
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase.config'
 
@@ -22,7 +22,7 @@ function classNames(...classes) {
 export default function Example() {
   const userData = auth.currentUser
   let photoURL = null
-  const imagePlaceholder = ArdaFoto
+  const imagePlaceholder = profilePlaceholder
   if (userData && userData.photoURL) {
     photoURL = userData.photoURL;
   } else {
