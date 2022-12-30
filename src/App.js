@@ -10,6 +10,9 @@ import {
   Navigate
 } from "react-router-dom";
 import ScrollToTop from "./Components/ScrollToTop";
+import Login from "./Pages/Login";
+import SignUp from "./Pages/SignUp";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="*" element={<Navigate to="/"/>} />
+        <Route path="/Login" element ={<Login/>}/>
+        <Route path="/SignUp" element ={<SignUp/>}/>
+        <Route path="/Profile" element ={<Profile/>}/>
       </Routes>
     </div>
   </Router>
