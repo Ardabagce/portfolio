@@ -3,10 +3,10 @@ import {auth} from '../firebase.config'
 
 export default class Profile extends Component {
   render() {
-    const user = auth.currentUser
+    const name = auth.currentUser
     return (
       <div>
-          {user ? <h1>{user.email}</h1> : <h1>No user Logged in</h1>}
+          {name ? <h1>{name.email}</h1> : <h1>No user Logged in</h1>}
       </div>
     )
   }
