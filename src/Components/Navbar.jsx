@@ -5,7 +5,7 @@ import logo from "../Assets/logo.png"
 import ArdaFoto from "../Assets/ArdaFoto.jpg"
 
 const navigation = [
-  { name: 'Home', href: '/Home', current: true },
+  { name: 'Home', href: '/Home', current: false },
   { name: 'About', href: '/About', current: false },
   { name: 'Resume', href: '/Resume', current: false },
   { name: 'Contact', href: '/Contact', current: false },
@@ -35,6 +35,7 @@ export default function Example() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
+                  <a href='/Home'>
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src={logo}
@@ -45,6 +46,7 @@ export default function Example() {
                     src={logo}
                     alt="Arda Bagce"
                   />
+                  </a>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -76,7 +78,7 @@ export default function Example() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex rounded bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
