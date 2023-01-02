@@ -1,19 +1,20 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
-import {auth,signInWithGoogle} from '../firebase.config'
+import { auth, signInWithGoogle } from '../firebase.config';
 
 export default function Login() {
-  const[loginEmail,setLoginEmail]=useState("")
-  const[loginPass,setLoginPass]=useState("")
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPass, setLoginPass] = useState('');
+
   const handleLogin = async () => {
     try {
-      const userCredential = await auth.signInWithEmailAndPassword(loginEmail, loginPass)
-      console.log('User logged in:', userCredential.user)
+      const userCredential = await signInWithEmailAndPassword(loginEmail, loginPass);
+      console.log('User logged in:', userCredential.user);
     } catch (error) {
-      console.error('Error signing in:', error)
+      console.error(error);
     }
-  }
+  };
       return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">

@@ -23,8 +23,6 @@ import Tables from "./views/admin/Tables.js";
 
 import Admin from "./layouts/Admin";
 import Auth from "./layouts/Auth";
-import protectedRoutes from "./Components/Dashboard/protectedRoutes";
-
 
 
 function App() {
@@ -39,7 +37,7 @@ function App() {
       <Routes>
 
         {/*Public routes */}
-        <Route path="/" element={<Home />}>
+        <Route path="/" element={<Home />}/>
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/resume" element={<Resume />} />
@@ -54,7 +52,6 @@ function App() {
         <Route path="/admin/dashboard" element={<Dashboard/>} />
         <Route path="/admin/settings" element={<Settings/>} />
         <Route path="/admin/tables" element={<Tables/>} />
-        </Route>
         </Routes>
   </Router>
   );
