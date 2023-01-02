@@ -9,13 +9,13 @@ import {
   Routes,
   Navigate
 } from "react-router-dom";
-import ScrollToTop from "./Components/ScrollToTop";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import Profile from "./Pages/Profile";
 import {auth} from './firebase.config'
 import { onAuthStateChanged } from 'firebase/auth';
 import { useState } from "react";
+import Blog from "./Pages/Blog";
 
 function App() {
 
@@ -35,6 +35,7 @@ function App() {
         <Route path="*" element={<Navigate to="/"/>} />
         <Route path="/Login" element ={<Login/>}/>
         <Route path="/SignUp" element ={<SignUp/>}/>
+        <Route path="/Blog" element ={<Blog/>}/>
         <Route path="/Profile" element ={<Profile/>}/>
       </Routes>
     </div>
