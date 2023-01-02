@@ -11,11 +11,21 @@ import {
 } from "react-router-dom";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
-import Profile from "./Pages/Profile";
 import {auth} from './firebase.config'
 import { onAuthStateChanged } from 'firebase/auth';
 import { useState } from "react";
 import Blog from "./Pages/Blog";
+import "@fortawesome/react-fontawesome"
+
+import Dashboard from "./views/admin/Dashboard.js";
+import Settings from "./views/admin/Settings.js";
+import Tables from "./views/admin/Tables.js";
+
+import Admin from "./layouts/Admin";
+import Auth from "./layouts/Auth";
+import protectedRoutes from "./Components/Dashboard/protectedRoutes";
+
+
 
 function App() {
 
@@ -25,10 +35,11 @@ function App() {
   })
   return (
     <Router>
-    <div className="App">
       <NavigationBar/>
       <Routes>
-        <Route path="/" element={<Home />} />
+
+        {/*Public routes */}
+        <Route path="/" element={<Home />}>
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/resume" element={<Resume />} />
@@ -36,9 +47,15 @@ function App() {
         <Route path="/Login" element ={<Login/>}/>
         <Route path="/SignUp" element ={<SignUp/>}/>
         <Route path="/Blog" element ={<Blog/>}/>
-        <Route path="/Profile" element ={<Profile/>}/>
-      </Routes>
-    </div>
+
+        {/*Private routes */}
+        <Route path="/admin" element={<Admin/>} />
+        <Route path="/auth" element={<Auth/>} />
+        <Route path="/admin/dashboard" element={<Dashboard/>} />
+        <Route path="/admin/settings" element={<Settings/>} />
+        <Route path="/admin/tables" element={<Tables/>} />
+        </Route>
+        </Routes>
   </Router>
   );
 }

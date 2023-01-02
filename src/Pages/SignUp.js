@@ -23,7 +23,6 @@ export default function SignUp() {
       })
       return () => unsubscribe()
     }, [])
-
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
