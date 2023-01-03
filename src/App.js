@@ -18,7 +18,6 @@ import Settings from "./views/admin/Settings.js";
 import Tables from "./views/admin/Tables.js";
 
 import Admin from "./layouts/Admin";
-console.log(process.env.REACT_APP_MY_ENVIRONMENT_VARIABLE);
 
 
 function App() {
