@@ -1,32 +1,61 @@
 // Import the functions you need from the SDKs you need
+import toast from "react-hot-toast"
 import { initializeApp } from "firebase/app"; 
-import {getAuth, GoogleAuthProvider,signInWithPopup } from "firebase/auth"
+import {onAuthStateChanged ,createUserWithEmailAndPassword, getAuth, GoogleAuthProvider,signInWithEmailAndPassword,signOut,signInWithPopup } from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_API_KEY,
-  authDomain: process.env.REACT_AUTH_DOMAIN,
-  projectId: process.env.REACT_PROJECT_ID,
-  storageBucket: process.env.REACT_STOREGE_BUCKET,
-  messagingSenderId:process.env.REACT_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_ID,
-  measurementId: process.env.REACT_MEASUREMENT_ID
+  apiKey: "AIzaSyBHqW6dP0j1M2jMXD7Je9ItHq_K3QAW6xk",
+  authDomain: "portfolio-5a4c5.firebaseapp.com",
+  projectId: "portfolio-5a4c5",
+  storageBucket: "portfolio-5a4c5.appspot.com",
+  messagingSenderId: "597809129645",
+  appId: "1:597809129645:web:b7e9fe5f4df956be843e24",
+  measurementId: "G-ZJ1V70X37J"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const auth =getAuth(app);
+export const auth =getAuth( );
 
 const Provider = new GoogleAuthProvider();
 
 export const userData = auth.currentUser
 
+export const register = async (email,password) =>{
+  try{const {user} = await createUserWithEmailAndPassword(auth,email,password);
+  return user}
+  catch(error){toast(error.message)}
+}
+export const signin = async(email,password)=>{
+  try{const {user} = await signInWithEmailAndPassword(auth,email,password)
+  return user}
+  catch(error){toast(error.message)}
+}
 export const signInWithGoogle=()=>{
   signInWithPopup(auth,Provider).then((result)=>{
     return(
-      <div>Giriş Başarılı</div>
+      result
     )
   }).catch((error)=>{
     alert(error)
   })
 }
+export const logOut=async()=>{
+  localStorage.removeItem('user'); // delete user item from local storage
+  try{
+    await signOut(auth)
+    return true
+  } catch(error){
+    toast.error(error.message) 
+  }
+}
+
+onAuthStateChanged(auth,(user)=>{
+  if(user){
+    console.log('User',user)
+  }
+  else{
+    console.log('Kullanıcı oturumu kapattı')
+  }
+})

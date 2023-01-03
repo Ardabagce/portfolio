@@ -1,4 +1,5 @@
-export default function Example() {
+export default function HomeHero() {
+
 
   return (
     <div className="isolate bg-white">

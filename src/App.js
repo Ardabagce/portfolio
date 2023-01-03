@@ -11,9 +11,6 @@ import {
 } from "react-router-dom";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
-import {auth} from './firebase.config'
-import { onAuthStateChanged } from 'firebase/auth';
-import { useState } from "react";
 import Blog from "./Pages/Blog";
 import "@fortawesome/react-fontawesome"
 
@@ -25,14 +22,11 @@ import Admin from "./layouts/Admin";
 import Auth from "./layouts/Auth";
 
 
+
 function App() {
 
-  const[user,setUser]=useState({})
-  onAuthStateChanged(auth,(currentUser)=>{
-    setUser(currentUser)
-  })
-  return (
-    <Router>
+
+  return (<>
       <NavigationBar/>
       <Routes>
 
@@ -53,7 +47,7 @@ function App() {
         <Route path="/admin/settings" element={<Settings/>} />
         <Route path="/admin/tables" element={<Tables/>} />
         </Routes>
-  </Router>
+        </>
   );
 }
 

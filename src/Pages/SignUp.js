@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import {createUserWithEmailAndPassword} from 'firebase/auth'
-import {auth} from '../firebase.config'
+import {register} from '../firebase.config'
+import {Toaster} from "react-hot-toast"
+import { useNavigate } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 
 export default function SignUp() {
     const[signUpEmail,setSignUpEmail]=useState("")
     const[signUpPass,setSignUpPass]=useState("")
-    const signup=async()=>{try{
-      const user=await createUserWithEmailAndPassword(auth, signUpEmail,signUpPass)
-      console.log(user)
+    const signup=async (e)=>{
+        e.preventDefault();
+        const user= await register(signUpEmail,signUpPass)
+        navigate('/Login',{
+            replace : true
+        })
     }
-
-    catch(error){console.log(error)}
-    };
-    const [currentUser, setCurrentUser] = useState(null)
+    const navigate = useNavigate();
+    const isLoggedIn = useSelector(state => state.auth.user);
+  
     useEffect(() => {
-      const unsubscribe = auth.onAuthStateChanged((user) => {
-        if (user) {
-          setCurrentUser(user)
-        } else {
-          setCurrentUser(null)
-        }
-      })
-      return () => unsubscribe()
-    }, [])
+      if (isLoggedIn) {
+        navigate('/admin/dashboard');
+      }
+    }, [isLoggedIn]);
+  
+    
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
+            <Toaster/>
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
+                
                 <h1 className="text-3xl font-semibold text-center text-purple-700 uppercase">
-                    SignUp{currentUser}
+                    SignUp
                 </h1>
                 <form className="mt-6">
                     <div className="mb-2">

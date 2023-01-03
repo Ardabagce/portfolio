@@ -3,8 +3,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, PhotoIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "../Assets/logo.png"
 import profilePlaceholder from "../Assets/profilePlaceholder.jpeg"
-import { signOut } from 'firebase/auth'
-import { auth } from '../firebase.config'
+import { logOut as logoutHandle } from '../firebase.config'
+import {useDispatch, useSelector} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const navigation = [
   { name: 'Home', href: '/Home', current: false },
@@ -14,25 +15,19 @@ const navigation = [
   { name: 'Blog', href: '/Blog', current: false },
 ]
 
-
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Example() {
-  const userData = auth.currentUser
-  let photoURL = null
-  const imagePlaceholder = profilePlaceholder
-  if (userData && userData.photoURL) {
-    photoURL = userData.photoURL;
-  } else {
-    photoURL = imagePlaceholder;
+  const navigate = useNavigate()
+  const dispatch = useDispatch(logoutHandle)
+  const handleLogOut = async()=>{
+    await logoutHandle()
+    dispatch(logoutHandle)
+    navigate('/Login', {replace:true})
   }
-  
-  const logout=async()=>{
-    await signOut(auth)
-  }
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -99,8 +94,7 @@ export default function Example() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src=
-                        {photoURL}
+                        src={profilePlaceholder}
                         alt=""
                       />
                     </Menu.Button>
@@ -149,7 +143,7 @@ export default function Example() {
                       </Menu.Item><Menu.Item>
                         {({ active }) => (
                           <a
-                            onClick={logout}
+                            onClick={handleLogOut}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign Out

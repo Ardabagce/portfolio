@@ -1,22 +1,41 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
-import { useState } from 'react';
-import { auth, signInWithGoogle } from '../firebase.config';
+import { useState, useEffect } from 'react';
+
+import { signInWithGoogle, signin } from '../firebase.config';
+import {Toaster} from "react-hot-toast"
+import {useDispatch, useSelector} from "react-redux"
+import { login as loginHandle } from '../store/auth';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPass, setLoginPass] = useState('');
 
-  const handleLogin = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(loginEmail, loginPass);
-      console.log('User logged in:', userCredential.user);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    const dispatch = useDispatch(loginHandle)
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const isLoggedIn = useSelector(state => state.auth.user);
+  
+    useEffect(() => {
+      if (isLoggedIn) {
+        navigate('/admin/dashboard');
+      }
+    }, [isLoggedIn]);
+  
+    
+
+    const handleLogin = async (e) => {
+      e.preventDefault();
+    const user= await signin(email,password)
+    if(user){
+    dispatch(loginHandle(user))
+    navigate('/',{
+        replace : true
+    })
+    }}
+    
       return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
+            <Toaster/>
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center text-purple-700 uppercase">
                     Login
@@ -32,7 +51,7 @@ export default function Login() {
                         <input
                             type="email"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            onChange={(event)=>{setLoginEmail(event.target.value)}}
+                            onChange={(event)=>{setEmail(event.target.value)}}
                         />
                     </div>
                     <div className="mb-2">
@@ -45,7 +64,7 @@ export default function Login() {
                         <input
                             type="password"
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            onChange={(event)=>{setLoginPass(event.target.value)}}
+                            onChange={(event)=>{setPassword(event.target.value)}}
                         />
                     </div>
                     <a
@@ -66,7 +85,6 @@ export default function Login() {
                 </div>
                 <div className="flex mt-4 gap-x-2">
                     <button
-                        onClick={signInWithGoogle}
                         type="button"
                         className="flex items-center justify-center w-full p-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-violet-600"
                     >
