@@ -4,7 +4,6 @@ import Contact from "./Pages/Contact";
 import Resume from "./Pages/Resume";
 import NavigationBar from "./Components/Navbar";
 import {
-  BrowserRouter as Router,
   Route,
   Routes,
   Navigate
@@ -19,8 +18,7 @@ import Settings from "./views/admin/Settings.js";
 import Tables from "./views/admin/Tables.js";
 
 import Admin from "./layouts/Admin";
-import Auth from "./layouts/Auth";
-
+console.log(process.env.REACT_APP_MY_ENVIRONMENT_VARIABLE);
 
 
 function App() {
@@ -42,7 +40,6 @@ function App() {
 
         {/*Private routes */}
         <Route path="/admin" element={<Admin/>} />
-        <Route path="/auth" element={<Auth/>} />
         <Route path="/admin/dashboard" element={<Dashboard/>} />
         <Route path="/admin/settings" element={<Settings/>} />
         <Route path="/admin/tables" element={<Tables/>} />

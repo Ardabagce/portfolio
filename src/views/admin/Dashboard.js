@@ -1,7 +1,6 @@
 import React from "react";
 import {useSelector} from 'react-redux'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import profilePlaceholder from '../../Assets/profilePlaceholder.jpeg'
 import { Fragment } from 'react'
 import { Bars3Icon} from '@heroicons/react/24/outline'
 

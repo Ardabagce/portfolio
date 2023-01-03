@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import { signInWithGoogle, signin } from '../firebase.config';
+import { signin } from '../firebase.config';
 import {Toaster} from "react-hot-toast"
 import {useDispatch, useSelector} from "react-redux"
 import { login as loginHandle } from '../store/auth';
