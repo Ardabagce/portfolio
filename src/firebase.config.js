@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
 import toast from "react-hot-toast"
 import { initializeApp } from "firebase/app"; 
-import {onAuthStateChanged ,createUserWithEmailAndPassword, getAuth, GoogleAuthProvider,signInWithEmailAndPassword,signOut,signInWithPopup } from "firebase/auth"
+import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider,signInWithEmailAndPassword,signOut,signInWithPopup } from "firebase/auth"
+import { useDispatch } from 'react-redux';
+import { logout } from './store/authProvider';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -15,12 +17,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-export const auth =getAuth( );
-
+export const auth =getAuth();
 const Provider = new GoogleAuthProvider();
-
 export const userData = auth.currentUser
+
+
 
 export const register = async (email,password) =>{
   try{const {user} = await createUserWithEmailAndPassword(auth,email,password);
@@ -41,19 +42,11 @@ export const signInWithGoogle=()=>{
     alert(error)
   })
 }
-export const logOut=async()=>{try{
-  await signOut(auth)
-  return true
-}  catch(error){
-    toast.error(error.message) 
-   }
-}
-
-onAuthStateChanged(auth,(user)=>{
-  if(user){
-    console.log('User',user)
+export const logOut = async () => {
+  try {
+    await signOut(auth);
+    toast.success('Çıkış Başarılı');
+  } catch (error) {
+    toast.error(error.message);
   }
-  else{
-    console.log('Kullanıcı oturumu kapattı')
-  }
-})
+};

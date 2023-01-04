@@ -4,8 +4,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "../Assets/logo.png"
 import profilePlaceholder from "../Assets/profilePlaceholder.jpeg"
 import { logOut as logoutHandle } from '../firebase.config'
-import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { getAuth, signOut } from 'firebase/auth'
+import toast from 'react-hot-toast'
 
 const navigation = [
   { name: 'Home', href: '/Home', current: false },
@@ -20,14 +21,14 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch(logoutHandle)
-  const handleLogOut = async()=>{
-    await logoutHandle()
-    dispatch(logoutHandle)
-    navigate('/Login', {replace:true})
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const handleLogOut = () =>{signOut(auth).then(() => {
+    navigate('/Login', { replace: true });
+  }).catch((error) => {
+    toast.error(error.message);
+  });
   }
-
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

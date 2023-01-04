@@ -18,12 +18,12 @@ import Settings from "./views/admin/Settings.js";
 import Tables from "./views/admin/Tables.js";
 
 import Admin from "./layouts/Admin";
+ import FooterSmall from "./Components/Dashboard/Footers/FooterSmall"
 
 
 function App() {
-
-
-  return (<>
+      return (
+      <>
       <NavigationBar/>
       <Routes>
 
@@ -43,6 +43,7 @@ function App() {
         <Route path="/admin/settings" element={<Settings/>} />
         <Route path="/admin/tables" element={<Tables/>} />
         </Routes>
+        <FooterSmall/>
         </>
   );
 }

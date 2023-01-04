@@ -18,9 +18,9 @@ export default function FooterSmall(props) {
                 Copyright © {new Date().getFullYear()}{" "}
                 <a
                   href="https://www.creative-tim.com?ref=nr-footer-small"
-                  className="text-white hover:text-blueGray-300 text-sm font-semibold py-1"
+                  className="text-black hover:text-blueGray-300 text-sm font-semibold py-1"
                 >
-                  Creative Tim
+                  Arda Bagce
                 </a>
               </div>
             </div>
@@ -28,36 +28,29 @@ export default function FooterSmall(props) {
               <ul className="flex flex-wrap list-none md:justify-end  justify-center">
                 <li>
                   <a
-                    href="https://www.creative-tim.com?ref=nr-footer-small"
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
+                    href="https://twitter.com/ardabagce"
+                    className="text-black hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
                   >
-                    Creative Tim
+                    Twitter
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://www.creative-tim.com/presentation?ref=nr-footer-small"
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
+                    href="https://www.linkedin.com/in/arda-ba%C4%9F%C3%A7e-83b310131/"
+                    className="text-black hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
                   >
-                    About Us
+                    LinkedIn
                   </a>
                 </li>
                 <li>
                   <a
-                    href="http://blog.creative-tim.com?ref=nr-footer-small"
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
+                    href="http://github.com/ardabagce"
+                    className="text-black hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
                   >
-                    Blog
+                    Github
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="https://github.com/creativetimofficial/notus-react/blob/main/LICENSE.md?ref=nr-footer-small"
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
-                  >
-                    MIT License
-                  </a>
-                </li>
+                
               </ul>
             </div>
           </div>
