@@ -19,6 +19,7 @@ import Tables from "./views/admin/Tables.js";
 
 import Admin from "./layouts/Admin";
  import FooterSmall from "./Components/Dashboard/Footers/FooterSmall"
+import BlogPost from "./Pages/BlogPost";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/admin/dashboard" element={<Dashboard/>} />
         <Route path="/admin/settings" element={<Settings/>} />
         <Route path="/admin/tables" element={<Tables/>} />
+        <Route path="/admin/blogpost" element={<BlogPost/>}/>
         </Routes>
         <FooterSmall/>
         </>

@@ -1,9 +1,7 @@
 // Import the functions you need from the SDKs you need
 import toast from "react-hot-toast"
 import { initializeApp } from "firebase/app"; 
-import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider,signInWithEmailAndPassword,signOut,signInWithPopup } from "firebase/auth"
-import { useDispatch } from 'react-redux';
-import { logout } from './store/authProvider';
+import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider,signInWithEmailAndPassword,signOut } from "firebase/auth"
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -32,15 +30,6 @@ export const signin = async(email,password)=>{
   try{const {user} = await signInWithEmailAndPassword(auth,email,password)
   return user}
   catch(error){toast(error.message)}
-}
-export const signInWithGoogle=()=>{
-  signInWithPopup(auth,Provider).then((result)=>{
-    return(
-      result
-    )
-  }).catch((error)=>{
-    alert(error)
-  })
 }
 export const logOut = async () => {
   try {
