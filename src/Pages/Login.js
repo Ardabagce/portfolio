@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-
 import { signin } from '../firebase.config';
 import {Toaster} from "react-hot-toast"
 import {useDispatch, useSelector} from "react-redux"
@@ -13,15 +12,13 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const isLoggedIn = useSelector(state => state.auth.user);
+    const isLoggedIn = useSelector((state) => state.auth.user);
   
     useEffect(() => {
-      if (isLoggedIn) {
-        navigate('/admin/dashboard');
-      }
-    }, [isLoggedIn]);
-  
-    
+        if (isLoggedIn) {
+          navigate('/admin/dashboard');
+        }
+      }, [isLoggedIn]);
 
     const handleLogin = async (e) => {
       e.preventDefault();
@@ -32,6 +29,9 @@ export default function Login() {
         replace : true
     })
     }}
+  
+    
+      
     
       return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">

@@ -3,10 +3,10 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "../Assets/logo.png"
 import profilePlaceholder from "../Assets/profilePlaceholder.jpeg"
-import { logOut as logoutHandle } from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
 import { getAuth, signOut } from 'firebase/auth'
 import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux';
 
 const navigation = [
   { name: 'Home', href: '/Home', current: false },
@@ -20,15 +20,25 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function NavBar() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const logOut = () => ({
+    type: 'LOG_OUT',
+  });
   const auth = getAuth();
-  const handleLogOut = () =>{signOut(auth).then(() => {
-    navigate('/Login', { replace: true });
+  const handleLogOut = () => {
+  console.log("çıkış yapılıyor")
+  signOut(auth).then(() => {
+    localStorage.removeItem('user');
+    dispatch(logOut()); // Dispatch an action to set isLoggedIn to false
+  }).then(() => {
+    navigate('/Login');
+    console.log('yönlendirildi');
   }).catch((error) => {
     toast.error(error.message);
   });
-  }
+}
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
